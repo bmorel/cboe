@@ -24,7 +24,7 @@ Cursor::Cursor(fs::path imgPath, float hotSpotX, float hotSpotY)
 Cursor::~Cursor() {
     if (ptr != nullptr) {
 	    x11::Cursor* realPtr = reinterpret_cast<x11::Cursor*>(ptr);
-	    x11::XFreeCursor(NULL, *realPtr);
+	    //x11::XFreeCursor(NULL, *realPtr);
 	    delete realPtr;
 	}
 }

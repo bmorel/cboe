@@ -91,41 +91,41 @@ void makeFrontWindow(sf::Window& win) {
 
 void setWindowFloating(sf::Window& win, bool floating) {
 	// Code adapted from <http://stackoverflow.com/a/16235920>
-	auto display = XOpenDisplay(NULL);
-	Atom wmStateAbove = XInternAtom(display, "_NET_WM_STATE_ABOVE", true);
-	if(wmStateAbove != None) {
-		std::cout << "_NET_WM_STATE_ABOVE has atom of " << long(wmStateAbove) << std::endl;
-	} else {
-		std::cerr << "ERROR: cannot find atom for _NET_WM_STATE_ABOVE!\n";
-	}
+	//auto display = XOpenDisplay(NULL);
+	//Atom wmStateAbove = XInternAtom(display, "_NET_WM_STATE_ABOVE", true);
+	//if(wmStateAbove != None) {
+	//	std::cout << "_NET_WM_STATE_ABOVE has atom of " << long(wmStateAbove) << std::endl;
+	//} else {
+	//	std::cerr << "ERROR: cannot find atom for _NET_WM_STATE_ABOVE!\n";
+	//}
 		
-	Atom wmNetWmState = XInternAtom(display, "_NET_WM_STATE", true);
-	if(wmNetWmState != None) {
-		std::cout << "_NET_WM_STATE has atom of " << long(wmNetWmState) << std::endl;
-	} else {
-		std::cerr << "ERROR: cannot find atom for _NET_WM_STATE !\n";
-	}
+	//Atom wmNetWmState = XInternAtom(display, "_NET_WM_STATE", true);
+	//if(wmNetWmState != None) {
+	//	std::cout << "_NET_WM_STATE has atom of " << long(wmNetWmState) << std::endl;
+	//} else {
+	//	std::cerr << "ERROR: cannot find atom for _NET_WM_STATE !\n";
+	//}
 	// set window always on top hint
-	if(wmStateAbove != None) {
-		XClientMessageEvent xclient;
-		memset(&xclient, 0, sizeof(xclient));
-		
-		xclient.type = ClientMessage;
-		xclient.window = win.getSystemHandle(); // GDK_WINDOW_XID(window);
-		xclient.message_type = wmNetWmState; //gdk_x11_get_xatom_by_name_for_display( display, "_NET_WM_STATE" );
-		xclient.format = 32;
-		xclient.data.l[0] = floating ? 1 : 0;
-		xclient.data.l[1] = wmStateAbove; //gdk_x11_atom_to_xatom_for_display (display, state1);
-		xclient.data.l[2] = 0; //gdk_x11_atom_to_xatom_for_display (display, state2);
-		xclient.data.l[3] = 0;
-		xclient.data.l[4] = 0;
-		XSendEvent(display,
-			win.getSystemHandle(), // !! DefaultRootWindow( display ) !!!
-			False,
-			SubstructureRedirectMask | SubstructureNotifyMask,
-			(XEvent *)&xclient
-		);
-	}
+	//if(wmStateAbove != None) {
+	//	XClientMessageEvent xclient;
+	//	memset(&xclient, 0, sizeof(xclient));
+	//	
+	//	xclient.type = ClientMessage;
+	//	xclient.window = win.getSystemHandle(); // GDK_WINDOW_XID(window);
+	//	xclient.message_type = wmNetWmState; //gdk_x11_get_xatom_by_name_for_display( display, "_NET_WM_STATE" );
+	//	xclient.format = 32;
+	//	xclient.data.l[0] = floating ? 1 : 0;
+	//	xclient.data.l[1] = wmStateAbove; //gdk_x11_atom_to_xatom_for_display (display, state1);
+	//	xclient.data.l[2] = 0; //gdk_x11_atom_to_xatom_for_display (display, state2);
+	//	xclient.data.l[3] = 0;
+	//	xclient.data.l[4] = 0;
+	//	XSendEvent(display,
+	//		win.getSystemHandle(), // !! DefaultRootWindow( display ) !!!
+	//		False,
+	//		SubstructureRedirectMask | SubstructureNotifyMask,
+	//		(XEvent *)&xclient
+	//	);
+	//}
 }
 
 void init_fileio() {
